@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../build/rosterMate.Api.props" />
+</Project>

@@ -1,0 +1,11 @@
+/Users/rewat/dev/rosterMate/RosterMate.Domain/bin/Debug/net9.0/RosterMate.Domain.deps.json
+/Users/rewat/dev/rosterMate/RosterMate.Domain/bin/Debug/net9.0/RosterMate.Domain.dll
+/Users/rewat/dev/rosterMate/RosterMate.Domain/bin/Debug/net9.0/RosterMate.Domain.pdb
+/Users/rewat/dev/rosterMate/RosterMate.Domain/obj/Debug/net9.0/RosterMate.Domain.GeneratedMSBuildEditorConfig.editorconfig
+/Users/rewat/dev/rosterMate/RosterMate.Domain/obj/Debug/net9.0/RosterMate.Domain.AssemblyInfoInputs.cache
+/Users/rewat/dev/rosterMate/RosterMate.Domain/obj/Debug/net9.0/RosterMate.Domain.AssemblyInfo.cs
+/Users/rewat/dev/rosterMate/RosterMate.Domain/obj/Debug/net9.0/RosterMate.Domain.csproj.CoreCompileInputs.cache
+/Users/rewat/dev/rosterMate/RosterMate.Domain/obj/Debug/net9.0/RosterMate.Domain.dll
+/Users/rewat/dev/rosterMate/RosterMate.Domain/obj/Debug/net9.0/refint/RosterMate.Domain.dll
+/Users/rewat/dev/rosterMate/RosterMate.Domain/obj/Debug/net9.0/RosterMate.Domain.pdb
+/Users/rewat/dev/rosterMate/RosterMate.Domain/obj/Debug/net9.0/ref/RosterMate.Domain.dll
