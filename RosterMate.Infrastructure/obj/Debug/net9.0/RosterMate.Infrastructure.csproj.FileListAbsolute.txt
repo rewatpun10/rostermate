@@ -1,13 +1,14 @@
 /Users/rewat/dev/rosterMate/RosterMate.Infrastructure/bin/Debug/net9.0/RosterMate.Infrastructure.deps.json
 /Users/rewat/dev/rosterMate/RosterMate.Infrastructure/bin/Debug/net9.0/RosterMate.Infrastructure.dll
 /Users/rewat/dev/rosterMate/RosterMate.Infrastructure/bin/Debug/net9.0/RosterMate.Infrastructure.pdb
-/Users/rewat/dev/rosterMate/RosterMate.Infrastructure/bin/Debug/net9.0/RosterMate.Domain.dll
-/Users/rewat/dev/rosterMate/RosterMate.Infrastructure/bin/Debug/net9.0/RosterMate.Domain.pdb
+/Users/rewat/dev/rosterMate/RosterMate.Infrastructure/bin/Debug/net9.0/rosterMate.Domain.dll
+/Users/rewat/dev/rosterMate/RosterMate.Infrastructure/bin/Debug/net9.0/rosterMate.Domain.pdb
 /Users/rewat/dev/rosterMate/RosterMate.Infrastructure/obj/Debug/net9.0/RosterMate.Infrastructure.csproj.AssemblyReference.cache
 /Users/rewat/dev/rosterMate/RosterMate.Infrastructure/obj/Debug/net9.0/RosterMate.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
 /Users/rewat/dev/rosterMate/RosterMate.Infrastructure/obj/Debug/net9.0/RosterMate.Infrastructure.AssemblyInfoInputs.cache
 /Users/rewat/dev/rosterMate/RosterMate.Infrastructure/obj/Debug/net9.0/RosterMate.Infrastructure.AssemblyInfo.cs
 /Users/rewat/dev/rosterMate/RosterMate.Infrastructure/obj/Debug/net9.0/RosterMate.Infrastructure.csproj.CoreCompileInputs.cache
+/Users/rewat/dev/rosterMate/RosterMate.Infrastructure/obj/Debug/net9.0/RosterMate.Infrastructure.sourcelink.json
 /Users/rewat/dev/rosterMate/RosterMate.Infrastructure/obj/Debug/net9.0/RosterMa.E9FBAE0C.Up2Date
 /Users/rewat/dev/rosterMate/RosterMate.Infrastructure/obj/Debug/net9.0/RosterMate.Infrastructure.dll
 /Users/rewat/dev/rosterMate/RosterMate.Infrastructure/obj/Debug/net9.0/refint/RosterMate.Infrastructure.dll
