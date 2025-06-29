@@ -1,5 +1,9 @@
 using Microsoft.EntityFrameworkCore;
+using RossteraMate.Application.Services;
+using RosterMate.Application.Interfaces;
+using RosterMate.Domain.Interfaces;
 using RosterMate.Infrastructure.Data;
+using RosterMate.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +15,8 @@ builder.Services.AddDbContext<RosterMate.Infrastructure.Data.ApplicationDbContex
     builder.Services.AddControllers();
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
+    builder.Services.AddScoped<IStaffRepository, StaffRepository>();
+    builder.Services.AddScoped<IStaffService, StaffService>();  
 
 var app = builder.Build();
 
@@ -18,9 +24,12 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
 
+app.MapControllers();
 app.Run();
 

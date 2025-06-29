@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("rosterMate.Application")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d1c51bc6ec91d352ceebb7c4364b7ff1df7dcd1c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9156dbabffa8904cc026b2347ed0c8066fe3060d")]
 [assembly: System.Reflection.AssemblyProductAttribute("rosterMate.Application")]
 [assembly: System.Reflection.AssemblyTitleAttribute("rosterMate.Application")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
