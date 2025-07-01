@@ -12,18 +12,3 @@
 .vscode/
 .idea/
 *.vs/
-
-##############################################
-# Frontend (React, Node.js)
-##############################################
-node_modules/
-build/
-dist/
-.vscode/
-.DS_Store
-.env
-.env.*
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-.eslintcache
