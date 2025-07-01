@@ -1,4 +1,7 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using RosterMate.Application.DTOs;
+using RosterMate.Application.Interfaces;
 using RosterMate.Domain.Entities;
 using RosterMate.Domain.Interfaces;
 
@@ -8,53 +11,65 @@ namespace RosterMate.Api.Controllers
     [Route("api/[controller]")]
     public class StaffController : ControllerBase
     {
-        private readonly IStaffRepository _staffRepository;
-        public StaffController(IStaffRepository staffRepository)
+        private readonly IStaffService _staffService;
+
+        private readonly IMapper _mapper;
+        public StaffController(IStaffService staffService, IMapper mapper)
         {
-            _staffRepository = staffRepository;
+            _staffService = staffService;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Staff>>> GetAll()
+        public async Task<ActionResult<IEnumerable<StaffDto>>> GetAll()
 
         {
-            var staffList = await _staffRepository.GetAllAsync();
+            var staffList = await _staffService.GetAllAsync();
+            var staffDtos = _mapper.Map<IEnumerable<StaffDto>>(staffList);
             return Ok(staffList);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Staff>> GetById(int id)
+        public async Task<ActionResult<StaffDto>> GetById(int id)
         {
-            var staff = await _staffRepository.GetByIdAsync(id);
+            var staff = await _staffService.GetByIdAsync(id);
             if (staff == null) return NotFound();
-            return Ok(staff);
+            var staffDto = _mapper.Map<StaffDto>(staff);
+            return Ok(staffDto);
         }
 
         [HttpPost]
-        public async Task<ActionResult<Staff>> Create([FromBody] Staff staff)
+        public async Task<ActionResult<StaffDto>> Create([FromBody] CreateStaffDto staffDto)
         {
-            if (staff == null) return BadRequest("Staff cannot be null");
-            await _staffRepository.AddAsync(staff);
-            return CreatedAtAction(nameof(GetById), new { id = staff.Id }, staff);
+            if (staffDto == null) return BadRequest("Staff data cannot be null");
+            var createdStaff = await _staffService.AddAsync(staffDto);
+            if (createdStaff == null) return BadRequest("Failed to create staff");
+
+
+            var createdDto = _mapper.Map<StaffDto>(createdStaff);
+            return CreatedAtAction(nameof(GetById), new { id = createdDto.Id }, createdDto);
         }
+   
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> Update(int id, [FromBody] Staff staff)
+        public async Task<ActionResult> Update(int id, [FromBody] UpdateStaffDto staffDto)
         {
-            if (id != staff.Id) return BadRequest("Staff ID mismatch");
-            if (staff == null) return BadRequest("Staff cannot be null");
-            var existingStaff = await _staffRepository.GetByIdAsync(id);
+            if (staffDto == null) return BadRequest("Staff data cannot be null");
+            if (id != staffDto.Id) return BadRequest("Staff ID mismatch");
+            var existingStaff = await _staffService.GetByIdAsync(id);
             if (existingStaff == null) return NotFound();
-            await _staffRepository.UpdateAsync(staff);
+
+            await _staffService.UpdateAsync(staffDto);
             return NoContent();
         }
+      
 
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {
-            var staff = await _staffRepository.GetByIdAsync(id);
+            var staff = await _staffService.GetByIdAsync(id);
             if (staff == null) return NotFound();
-            await _staffRepository.DeleteAsync(staff.Id);
+            await _staffService.DeleteAsync(staff.Id);
             return NoContent();
         }
     }
