@@ -7,7 +7,7 @@ public class EmploymentDetail
     public string Position { get; set; }
     public DateTime StartDate { get; set; }
     public DateTime? EndDate { get; set; }
-    public EmploymentType employmentType { get; set; } // e.g., Full-time, Part-time, Casual
+    public EmploymentType EmploymentType { get; set; } // e.g., Full-time, Part-time, Casual
 
     // Navigation property
 

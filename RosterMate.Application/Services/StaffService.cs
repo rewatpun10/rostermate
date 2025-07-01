@@ -1,3 +1,5 @@
+using AutoMapper;
+using RosterMate.Application.DTOs;
 using RosterMate.Application.Interfaces;
 using RosterMate.Domain.Entities;
 using RosterMate.Domain.Interfaces;
@@ -8,30 +10,47 @@ namespace RossteraMate.Application.Services
     {
         private readonly IStaffRepository _staffRepository;
 
-        public StaffService(IStaffRepository staffRepository)
+        private readonly IMapper _mapper;
+
+        public StaffService(IStaffRepository staffRepository, IMapper mapper)
         {
             _staffRepository = staffRepository;
+            _mapper = mapper;
+
         }
 
-        public async Task<IEnumerable<Staff>> GetAllAsync()
+        public async Task<IEnumerable<StaffDto>> GetAllAsync()
         {
-            return await _staffRepository.GetAllAsync();
+            var staffList = await _staffRepository.GetAllAsync();
+            return _mapper.Map<IEnumerable<StaffDto>>(staffList);
         }
-        public async Task<Staff?> GetByIdAsync(int id)
+        public async Task<StaffDto?> GetByIdAsync(int id)
         {
-            return await _staffRepository.GetByIdAsync(id);
+            var staff = await _staffRepository.GetByIdAsync(id);
+            if (staff == null) return null;
+
+            return _mapper.Map<StaffDto>(staff);
         }
 
-        public async Task<Staff> AddAsync(Staff staff)
+        public async Task<Staff> AddAsync(CreateStaffDto staffDto)
         {
-            if (staff == null) throw new ArgumentNullException(nameof(staff));
-            return await _staffRepository.AddAsync(staff);
+            if (staffDto == null) throw new ArgumentNullException(nameof(staffDto), "Staff Dto cannot be null.");
+
+            var staff = _mapper.Map<Staff>(staffDto);
+
+            var created = await _staffRepository.AddAsync(staff);
+            return created;
+            
         }
 
-        public async Task UpdateAsync(Staff staff)
+        public async Task UpdateAsync(UpdateStaffDto staffDto)
+
         {
-            if (staff == null) throw new ArgumentNullException(nameof(staff));
-            await _staffRepository.UpdateAsync(staff);
+            var existing = await _staffRepository.GetByIdAsync(staffDto.Id);
+            if (existing == null) throw new Exception("Staff not found.");  
+
+            _mapper.Map(staffDto, existing);
+            await _staffRepository.UpdateAsync(existing);
         }
 
         public async Task DeleteAsync(int id)

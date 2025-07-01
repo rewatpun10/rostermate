@@ -22,12 +22,17 @@ namespace RosterMate.Infrastructure.Repositories
                    .ToListAsync();
         }
 
-        public async Task<Staff?> GetByIdAsync(int id)
+        public async Task<Staff> GetByIdAsync(int id)
         {
-            return await _context.Staff
+            var staff = await _context.Staff
                 .Include(s => s.EmploymentDetail)
                 .Include(s => s.PayrollDetail)
                 .FirstOrDefaultAsync(s => s.Id == id);
+
+            if (staff == null)
+                throw new InvalidOperationException($"Staff with Id {id} not found.");
+
+            return staff;
         }
 
         public async Task<Staff> AddAsync(Staff staff)
