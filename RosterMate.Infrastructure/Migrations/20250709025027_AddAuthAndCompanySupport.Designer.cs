@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RosterMate.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using RosterMate.Infrastructure.Data;
 namespace RosterMate.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250709025027_AddAuthAndCompanySupport")]
+    partial class AddAuthAndCompanySupport
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -149,6 +152,7 @@ namespace RosterMate.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Gender")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
@@ -218,9 +222,11 @@ namespace RosterMate.Infrastructure.Migrations
 
             modelBuilder.Entity("RosterMate.Domain.Entities.Staff", b =>
                 {
-                    b.Navigation("EmploymentDetail");
+                    b.Navigation("EmploymentDetail")
+                        .IsRequired();
 
-                    b.Navigation("PayrollDetail");
+                    b.Navigation("PayrollDetail")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

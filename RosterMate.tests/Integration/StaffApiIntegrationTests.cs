@@ -25,6 +25,7 @@ public class StaffApiIntegrationTests : IClassFixture<WebApplicationFactory<Prog
             MobileNumber = "0400000000",
             Gender = "Other",
             DateOfBirth = new DateTime(1995, 1, 1),
+            Password = "Test@123",
             EmploymentDetail = new EmploymentDetailDto
             {
                 Position = "QA",

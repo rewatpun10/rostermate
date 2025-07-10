@@ -1,6 +1,7 @@
 
 using Microsoft.EntityFrameworkCore;
 using RosterMate.Domain.Entities;
+using RosterMate.Infrastructure.Seeders;
 
 namespace RosterMate.Infrastructure.Data;
 

@@ -2,6 +2,7 @@ using AutoMapper;
 using RosterMate.Application.DTOs;
 using RosterMate.Application.Interfaces;
 using RosterMate.Domain.Entities;
+using RosterMate.Domain.Helpers;
 using RosterMate.Domain.Interfaces;
 
 namespace RossteraMate.Application.Services
@@ -36,7 +37,25 @@ namespace RossteraMate.Application.Services
         {
             if (staffDto == null) throw new ArgumentNullException(nameof(staffDto), "Staff Dto cannot be null.");
 
-            var staff = _mapper.Map<Staff>(staffDto);
+            var (passwordHash, passwordSalt) = PasswordHelper.HashPassword(staffDto.Password);
+
+            var staff = new Staff
+            {
+                FirstName = staffDto.FirstName,
+                MiddleName = staffDto.MiddleName,
+                LastName = staffDto.LastName,
+                DateOfBirth = staffDto.DateOfBirth,
+                Gender = staffDto.Gender,
+                Email = staffDto.Email,
+                MobileNumber = staffDto.MobileNumber,
+                PasswordHash = passwordHash,
+                PasswordSalt = passwordSalt,
+                Role = staffDto.Role,
+                CompanyId = staffDto.CompanyId, // Null means SuperAdmin
+                EmploymentDetail = _mapper.Map<EmploymentDetail>(staffDto.EmploymentDetail),
+                PayrollDetail = _mapper.Map<PayrollDetail>(staffDto.PayrollDetail)
+            };
+
 
             var created = await _staffRepository.AddAsync(staff);
             return created;
