@@ -57,12 +57,21 @@ namespace RosterMate.Infrastructure.Repositories
                 await _context.SaveChangesAsync();
             }
         }
-        
+
         public async Task<bool> ExistsAsync(int id)
         {
             return await _context.Staff.AnyAsync(s => s.Id == id);
         }
-        
+
+        public async Task<Staff?> GetByEmailAsync(string email)
+        {
+            return await _context.Staff
+                .Include(s => s.EmploymentDetail)
+                .Include(s => s.PayrollDetail)
+                .Include(s => s.Company)
+                .FirstOrDefaultAsync(s => s.Email == email);
+        }
+
 
     }
 }

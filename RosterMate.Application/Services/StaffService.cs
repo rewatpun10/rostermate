@@ -59,14 +59,14 @@ namespace RossteraMate.Application.Services
 
             var created = await _staffRepository.AddAsync(staff);
             return created;
-            
+
         }
 
         public async Task UpdateAsync(UpdateStaffDto staffDto)
 
         {
             var existing = await _staffRepository.GetByIdAsync(staffDto.Id);
-            if (existing == null) throw new Exception("Staff not found.");  
+            if (existing == null) throw new Exception("Staff not found.");
 
             _mapper.Map(staffDto, existing);
             await _staffRepository.UpdateAsync(existing);
@@ -82,6 +82,13 @@ namespace RossteraMate.Application.Services
         public async Task<bool> ExistsAsync(int id)
         {
             return await _staffRepository.ExistsAsync(id);
+        }
+        
+        public async Task<Staff?> GetByEmailAsync(string email)
+        {
+            if (string.IsNullOrEmpty(email)) throw new ArgumentNullException(nameof(email), "Email cannot be null or empty.");
+
+            return await _staffRepository.GetByEmailAsync(email);
         }
     }
 }
