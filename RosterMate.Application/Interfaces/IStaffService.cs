@@ -11,5 +11,7 @@ namespace RosterMate.Application.Interfaces
         Task UpdateAsync(UpdateStaffDto staff);
         Task DeleteAsync(int id);
         Task<bool> ExistsAsync(int id);
+
+        Task<Staff?> GetByEmailAsync(string email);
     }
 }
