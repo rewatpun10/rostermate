@@ -5,7 +5,7 @@ on:
       - "**" # Run on all branches push
   pull_request:
     branches:
-      - "main" # Run on pull requests to main branch
+      - "main" # Run on pull requests to the main branch
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
