@@ -1,0 +1,51 @@
+name: .NET CI
+on:
+  push:
+    branches:
+      - "**" # Run on all branches push
+  pull_request:
+    branches:
+      - "main" # Run on pull requests to the main branch
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true # Cancel previous runs if new one is triggered
+
+jobs:
+  build:
+    name: Build and Test
+    runs-on: ubuntu-latest
+
+    services:
+      sqlserver:
+        image: mcr.microsoft.com/mssql/server:2019-latest
+        env:
+          SA_PASSWORD: "Docker@123"
+          ACCEPT_EULA: "Y"
+        ports:
+          - 1433:1433
+        options: >-
+          --health-cmd "exit 0"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 3
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Restore dependencies
+        run: dotnet restore rosterMate.sln
+
+      - name: Build Solution
+        run: dotnet build rosterMate.sln --configuration Release --no-restore
+
+      - name: Run Tests
+        run: dotnet test --logger "console;verbosity=detailed"
+        env:
+          ConnectionStrings__DefaultConnection: "Server=localhost,1433;Database=RosterMateTest;User Id=sa;Password=Docker@123;TrustServerCertificate=True;"

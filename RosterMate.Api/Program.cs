@@ -13,6 +13,13 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// explictly add config files for environment-based settings
+builder.Configuration
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true)
+    .AddEnvironmentVariables();
+
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddDbContext<RosterMate.Infrastructure.Data.ApplicationDbContext>(options =>
@@ -73,7 +80,7 @@ using (var scope = app.Services.CreateScope())
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
+    // app.MapOpenApi();
     app.UseSwagger();
     app.UseSwaggerUI();
 }
