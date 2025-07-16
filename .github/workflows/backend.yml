@@ -8,8 +8,8 @@ on:
       - "main" # Run on pull requests to main branch
 
 concurrency:
-group: ${{ github.workflow }}-${{ github.ref }}
-cancel-in-progress: true # Cancel previous runs if new one is triggered
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true # Cancel previous runs if new one is triggered
 
 jobs:
   build:
