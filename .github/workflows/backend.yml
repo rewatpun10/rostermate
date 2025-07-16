@@ -23,7 +23,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: "9.0.100-preview.3.24172.9"
+          dotnet-version: "9.0.100-preview.4.24267.6"
           include-prerelease: true
 
       - name: Restore dependencies
